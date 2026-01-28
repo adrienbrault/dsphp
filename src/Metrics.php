@@ -7,10 +7,12 @@ namespace AdrienBrault\DsPhp;
 use Closure;
 use ReflectionProperty;
 
+use function array_count_values;
 use function array_filter;
-use function array_intersect;
+use function array_sum;
 use function count;
 use function explode;
+use function min;
 use function strtolower;
 
 final class Metrics
@@ -48,8 +50,14 @@ final class Metrics
                 return 0.0;
             }
 
-            $common = array_intersect($actualTokens, $expectedTokens);
-            $numCommon = count($common);
+            $expectedCounts = array_count_values($expectedTokens);
+            $actualCounts = array_count_values($actualTokens);
+            $numCommon = 0;
+            foreach ($actualCounts as $token => $actualCount) {
+                if (isset($expectedCounts[$token])) {
+                    $numCommon += min($actualCount, $expectedCounts[$token]);
+                }
+            }
 
             if (0 === $numCommon) {
                 return 0.0;

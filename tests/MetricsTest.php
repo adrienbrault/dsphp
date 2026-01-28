@@ -92,4 +92,19 @@ final class MetricsTest extends TestCase
 
         self::assertSame(0.0, $metric($example, $prediction));
     }
+
+    #[Test]
+    public function f1HandlesDuplicateTokensCorrectly(): void
+    {
+        $metric = Metrics::f1();
+
+        // Prediction repeats "the" 3 times, expected has it once.
+        // Correct common count: min(3,1) for "the" + min(1,1) for "fox" = 2
+        // Precision: 2/4 = 0.5, Recall: 2/2 = 1.0
+        // F1 = 2 * (0.5 * 1.0) / (0.5 + 1.0) = 2/3
+        $example = new BasicQA(question: 'q', answer: 'the fox');
+        $prediction = new BasicQA(question: 'q', answer: 'the the the fox');
+
+        self::assertEqualsWithDelta(2 / 3, $metric($example, $prediction), 0.01);
+    }
 }
