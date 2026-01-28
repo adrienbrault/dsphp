@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace AdrienBrault\DsPhp\Tests;
 
 use AdrienBrault\DsPhp\ChainOfThought;
+use AdrienBrault\DsPhp\JsonAdapter;
 use AdrienBrault\DsPhp\LM;
 use AdrienBrault\DsPhp\Tests\Fixtures\BasicQA;
 use PHPUnit\Framework\Attributes\Test;
@@ -49,6 +50,19 @@ final class ChainOfThoughtTest extends TestCase
         $cot = new ChainOfThought(BasicQA::class, $lm);
 
         self::assertSame(BasicQA::class, $cot->predict->getSignature());
+    }
+
+    #[Test]
+    public function itExtractsReasoningWithJsonAdapter(): void
+    {
+        $response = '{"reasoning": "Let me think step by step.", "answer": "Paris"}';
+        $lm = $this->createLMStub($response);
+        $cot = new ChainOfThought(BasicQA::class, $lm, adapter: new JsonAdapter());
+
+        $result = ($cot)(new BasicQA(question: 'What is the capital of France?'));
+
+        self::assertSame('Let me think step by step.', $result->reasoning);
+        self::assertSame('Paris', $result->output->answer);
     }
 
     private function createLMStub(string $response): LM

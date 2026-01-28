@@ -40,10 +40,10 @@ final class Predict
         $messages = $this->adapter->formatMessages($this->signature, $this->demos, $inputValues);
         $options = $this->adapter->getOptions($this->signature);
 
-        $lastResponse = '';
+        $lastException = null;
+
         for ($attempt = 1; $attempt <= $this->maxRetries; ++$attempt) {
             $response = $this->lm->chat($messages, $options);
-            $lastResponse = $response;
 
             try {
                 $outputValues = $this->adapter->parseResponse($this->signature, $response);
@@ -55,30 +55,23 @@ final class Predict
                 // @var T
                 return new ($this->signature)(...$inputValues, ...$outputValues);
             } catch (Throwable $e) {
-                if ($attempt >= $this->maxRetries) {
-                    throw new PredictException(
-                        rawResponse: $lastResponse,
-                        attempts: $attempt,
-                        signatureClass: $this->signature,
-                        message: 'Failed to parse LLM response after '.$attempt.' attempt(s): '.$e->getMessage(),
-                        previous: $e,
-                    );
-                }
+                $lastException = $e;
 
-                // Append retry messages
-                $messages[] = ['role' => 'assistant', 'content' => $response];
-                $messages[] = ['role' => 'user', 'content' => "The previous response could not be parsed. Error: {$e->getMessage()}\nPlease try again following the format exactly."];
+                if ($attempt < $this->maxRetries) {
+                    // Append retry messages
+                    $messages[] = ['role' => 'assistant', 'content' => $response];
+                    $messages[] = ['role' => 'user', 'content' => "The previous response could not be parsed. Error: {$e->getMessage()}\nPlease try again following the format exactly."];
+                }
             }
         }
 
-        // @codeCoverageIgnoreStart
         throw new PredictException(
-            rawResponse: $lastResponse,
+            rawResponse: $this->lm->getHistory()[count($this->lm->getHistory()) - 1]['response'] ?? '',
             attempts: $this->maxRetries,
             signatureClass: $this->signature,
-            message: 'Failed to parse LLM response after '.$this->maxRetries.' attempt(s)',
+            message: 'Failed to parse LLM response after '.$this->maxRetries.' attempt(s): '.$lastException?->getMessage(),
+            previous: $lastException,
         );
-        // @codeCoverageIgnoreEnd
     }
 
     /**

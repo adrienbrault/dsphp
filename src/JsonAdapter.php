@@ -7,6 +7,7 @@ namespace AdrienBrault\DsPhp;
 use function array_key_exists;
 use function array_map;
 use function explode;
+use function is_array;
 use function is_string;
 use function json_decode;
 use function json_encode;
@@ -121,6 +122,16 @@ final class JsonAdapter implements Adapter
         }
 
         return $values;
+    }
+
+    public function parseReasoning(string $response): ?string
+    {
+        $decoded = json_decode($response, true);
+        if (is_array($decoded) && isset($decoded['reasoning']) && is_string($decoded['reasoning'])) {
+            return $decoded['reasoning'];
+        }
+
+        return null;
     }
 
     /**

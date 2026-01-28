@@ -34,4 +34,9 @@ interface Adapter
      * @return array<string, mixed>
      */
     public function parseResponse(string $signatureClass, string $response): array;
+
+    /**
+     * Extract chain-of-thought reasoning from the LLM response, if present.
+     */
+    public function parseReasoning(string $response): ?string;
 }
