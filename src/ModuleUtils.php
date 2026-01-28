@@ -42,7 +42,7 @@ final class ModuleUtils
             } elseif ($value instanceof ChainOfThought) {
                 // ChainOfThought contains a public Predict
                 $instances[$path.'.predict'] = $value->predict;
-            } elseif (is_object($value) && !$value instanceof BackedEnum && !$value instanceof LM && !$value instanceof Closure) {
+            } elseif (is_object($value) && !self::isFrameworkObject($value)) {
                 // Recurse into other objects (user modules)
                 $nested = self::findPredictInstances($value, $path);
                 foreach ($nested as $nestedPath => $nestedPredict) {
@@ -79,12 +79,23 @@ final class ModuleUtils
 
             if ($value instanceof Predict || $value instanceof ChainOfThought) {
                 self::setPropertyValue($clone, $prop, clone $value);
-            } elseif (is_object($value) && !$value instanceof BackedEnum && !$value instanceof LM && !$value instanceof Closure) {
+            } elseif (is_object($value) && !self::isFrameworkObject($value)) {
                 self::setPropertyValue($clone, $prop, self::deepClone($value));
             }
         }
 
         return $clone;
+    }
+
+    /**
+     * Check if a value is a framework object that should not be recursed into or cloned.
+     */
+    private static function isFrameworkObject(object $value): bool
+    {
+        return $value instanceof BackedEnum
+            || $value instanceof LM
+            || $value instanceof Closure
+            || $value instanceof Adapter;
     }
 
     /**

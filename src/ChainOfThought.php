@@ -31,6 +31,11 @@ final class ChainOfThought
         $this->predict = new Predict($signature, $lm, $adapter, $maxRetries);
     }
 
+    public function __clone()
+    {
+        $this->predict = clone $this->predict;
+    }
+
     /**
      * @param T $input
      *
