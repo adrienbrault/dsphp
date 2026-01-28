@@ -20,10 +20,12 @@ use function implode;
 use function is_array;
 use function is_subclass_of;
 use function json_decode;
-use function ltrim;
 use function preg_match;
-use function rtrim;
+use function preg_replace;
+use function str_ends_with;
+use function str_starts_with;
 use function strtolower;
+use function substr;
 use function trim;
 
 /**
@@ -48,10 +50,26 @@ final class SignatureReflection
         $lines = explode("\n", $doc);
         $text = [];
         foreach ($lines as $line) {
-            $line = trim($line);
-            $line = ltrim($line, '/* ');
-            $line = rtrim($line, '* /');
-            $line = trim($line);
+            $trimmed = trim($line);
+
+            // Skip pure opening/closing comment lines
+            if ('/**' === $trimmed || '*/' === $trimmed) {
+                continue;
+            }
+
+            // Handle single-line docblocks: /** ... */
+            if (str_starts_with($trimmed, '/**') && str_ends_with($trimmed, '*/')) {
+                $inner = trim(substr($trimmed, 3, -2));
+                if ('' !== $inner) {
+                    $text[] = $inner;
+                }
+
+                continue;
+            }
+
+            // Strip the leading " * " PHPDoc prefix
+            $line = preg_replace('/^\s*\*\s?/', '', $line);
+            $line = trim((string) $line);
             if ('' !== $line) {
                 $text[] = $line;
             }

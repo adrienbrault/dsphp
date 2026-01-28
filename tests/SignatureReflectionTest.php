@@ -8,6 +8,7 @@ use AdrienBrault\DsPhp\SignatureReflection;
 use AdrienBrault\DsPhp\Tests\Fixtures\BasicQA;
 use AdrienBrault\DsPhp\Tests\Fixtures\CheckCitationFaithfulness;
 use AdrienBrault\DsPhp\Tests\Fixtures\GenerateAnswer;
+use AdrienBrault\DsPhp\Tests\Fixtures\MathOperation;
 use AdrienBrault\DsPhp\Tests\Fixtures\Sentiment;
 use AdrienBrault\DsPhp\Tests\Fixtures\SentimentClassification;
 use PHPUnit\Framework\Attributes\Test;
@@ -164,5 +165,15 @@ final class SignatureReflectionTest extends TestCase
             'evidence',
         );
         self::assertSame(['excerpt one', 'excerpt two'], $value);
+    }
+
+    #[Test]
+    public function itPreservesSpecialCharactersInDocblock(): void
+    {
+        // Docblock: "Evaluate expressions with operators like + - * /"
+        // rtrim($line, '* /') treats chars as a set, stripping trailing * and /
+        // that are part of the content, not just comment markers.
+        $instruction = SignatureReflection::getTaskInstruction(MathOperation::class);
+        self::assertSame('Evaluate expressions with operators like + - * /', $instruction);
     }
 }
