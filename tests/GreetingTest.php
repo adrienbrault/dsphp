@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace AdrienBrault\Dsphp\Tests;
+namespace AdrienBrault\DsPhp\Tests;
 
-use AdrienBrault\Dsphp\Greeting;
+use AdrienBrault\DsPhp\Greeting;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 

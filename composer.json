@@ -21,12 +21,12 @@
     },
     "autoload": {
         "psr-4": {
-            "AdrienBrault\\Dsphp\\": "src/"
+            "AdrienBrault\\DsPhp\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "AdrienBrault\\Dsphp\\Tests\\": "tests/"
+            "AdrienBrault\\DsPhp\\Tests\\": "tests/"
         }
     },
     "config": {

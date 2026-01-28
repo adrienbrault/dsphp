@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace AdrienBrault\Dsphp;
+namespace AdrienBrault\DsPhp;
 
 final class Greeting
 {
