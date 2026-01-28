@@ -1,0 +1,48 @@
+{
+    "name": "adrienbrault/dsphp",
+    "description": "A PHP library",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Adrien Brault",
+            "email": "adrien.brault@gmail.com"
+        }
+    ],
+    "require": {
+        "php": "^8.4"
+    },
+    "require-dev": {
+        "friendsofphp/php-cs-fixer": "^3.75",
+        "phpstan/phpstan": "^2.1",
+        "phpstan/phpstan-phpunit": "^2.0",
+        "phpstan/phpstan-strict-rules": "^2.0",
+        "phpunit/phpunit": "^11.5 || ^12.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "AdrienBrault\\DsPhp\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "AdrienBrault\\DsPhp\\Tests\\": "tests/"
+        }
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true,
+    "scripts": {
+        "test": "vendor/bin/phpunit",
+        "phpstan": "vendor/bin/phpstan analyse",
+        "cs-fix": "vendor/bin/php-cs-fixer fix --allow-risky=yes",
+        "cs-check": "vendor/bin/php-cs-fixer fix --dry-run --diff --allow-risky=yes",
+        "ci": [
+            "@phpstan",
+            "@cs-check",
+            "@test"
+        ]
+    }
+}
