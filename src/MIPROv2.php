@@ -6,6 +6,16 @@ namespace AdrienBrault\DsPhp;
 
 use Closure;
 
+/**
+ * Simplified MIPROv2 approximation using bootstrap few-shot with random search.
+ *
+ * @experimental This is NOT a full MIPROv2 implementation. The real MIPROv2
+ *     performs instruction generation and prompt optimization alongside
+ *     bootstrap few-shot. This class only delegates to
+ *     BootstrapFewShotWithRandomSearch with budget presets matching the
+ *     'auto' parameter. A full implementation would require instruction
+ *     proposal generation and Bayesian optimization over prompt candidates.
+ */
 final class MIPROv2 implements Optimizer
 {
     private readonly int $numCandidates;
@@ -29,11 +39,6 @@ final class MIPROv2 implements Optimizer
 
     public function compile(object $student, array $trainset): object
     {
-        // MIPROv2 is an advanced meta-optimizer.
-        // It combines instruction generation with bootstrap few-shot.
-        // For this implementation, we use BootstrapFewShotWithRandomSearch
-        // as the core search strategy, with budgets set by the 'auto' preset.
-
         $optimizer = new BootstrapFewShotWithRandomSearch(
             metric: $this->metric,
             maxBootstrappedDemos: $this->maxBootstrappedDemos,
