@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace DSPy\Tests;
+namespace AdrienBrault\DsPhp\Tests;
 
-use DSPy\LM;
+use AdrienBrault\DsPhp\LM;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Symfony\AI\Platform\PlatformInterface;

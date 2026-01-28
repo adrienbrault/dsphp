@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace DSPy\Tests;
+namespace AdrienBrault\DsPhp\Tests;
 
+use AdrienBrault\DsPhp\OutputField;
+use AdrienBrault\DsPhp\Tests\Fixtures\BasicQA;
 use Attribute;
-use DSPy\OutputField;
-use DSPy\Tests\Fixtures\BasicQA;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use ReflectionClass;

@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace DSPy\Tests;
+namespace AdrienBrault\DsPhp\Tests;
 
-use DSPy\PredictException;
-use DSPy\Tests\Fixtures\BasicQA;
+use AdrienBrault\DsPhp\PredictException;
+use AdrienBrault\DsPhp\Tests\Fixtures\BasicQA;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use RuntimeException;

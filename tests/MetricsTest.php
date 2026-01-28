@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace DSPy\Tests;
+namespace AdrienBrault\DsPhp\Tests;
 
-use DSPy\Metrics;
-use DSPy\Tests\Fixtures\BasicQA;
+use AdrienBrault\DsPhp\Metrics;
+use AdrienBrault\DsPhp\Tests\Fixtures\BasicQA;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 

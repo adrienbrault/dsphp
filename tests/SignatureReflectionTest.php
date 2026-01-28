@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace DSPy\Tests;
+namespace AdrienBrault\DsPhp\Tests;
 
-use DSPy\SignatureReflection;
-use DSPy\Tests\Fixtures\BasicQA;
-use DSPy\Tests\Fixtures\CheckCitationFaithfulness;
-use DSPy\Tests\Fixtures\GenerateAnswer;
-use DSPy\Tests\Fixtures\Sentiment;
-use DSPy\Tests\Fixtures\SentimentClassification;
+use AdrienBrault\DsPhp\SignatureReflection;
+use AdrienBrault\DsPhp\Tests\Fixtures\BasicQA;
+use AdrienBrault\DsPhp\Tests\Fixtures\CheckCitationFaithfulness;
+use AdrienBrault\DsPhp\Tests\Fixtures\GenerateAnswer;
+use AdrienBrault\DsPhp\Tests\Fixtures\Sentiment;
+use AdrienBrault\DsPhp\Tests\Fixtures\SentimentClassification;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 

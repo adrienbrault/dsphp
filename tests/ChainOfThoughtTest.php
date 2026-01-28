@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace DSPy\Tests;
+namespace AdrienBrault\DsPhp\Tests;
 
-use DSPy\ChainOfThought;
-use DSPy\LM;
-use DSPy\Tests\Fixtures\BasicQA;
+use AdrienBrault\DsPhp\ChainOfThought;
+use AdrienBrault\DsPhp\LM;
+use AdrienBrault\DsPhp\Tests\Fixtures\BasicQA;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Symfony\AI\Platform\PlatformInterface;

@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace DSPy\Tests;
+namespace AdrienBrault\DsPhp\Tests;
 
-use DSPy\BootstrapFewShot;
-use DSPy\LM;
-use DSPy\Metrics;
-use DSPy\ModuleUtils;
-use DSPy\Predict;
-use DSPy\Tests\Fixtures\BasicQA;
+use AdrienBrault\DsPhp\BootstrapFewShot;
+use AdrienBrault\DsPhp\LM;
+use AdrienBrault\DsPhp\Metrics;
+use AdrienBrault\DsPhp\ModuleUtils;
+use AdrienBrault\DsPhp\Predict;
+use AdrienBrault\DsPhp\Tests\Fixtures\BasicQA;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Symfony\AI\Platform\PlatformInterface;

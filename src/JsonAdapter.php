@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace DSPy;
+namespace AdrienBrault\DsPhp;
 
 use function array_key_exists;
 use function array_map;

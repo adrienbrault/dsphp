@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace DSPy\Tests\Fixtures;
+namespace AdrienBrault\DsPhp\Tests\Fixtures;
 
 enum Sentiment: string
 {

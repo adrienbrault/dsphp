@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace DSPy;
+namespace AdrienBrault\DsPhp;
 
 /**
  * Pairs the LLM's chain-of-thought reasoning with the typed output.

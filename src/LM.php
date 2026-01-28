@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace DSPy;
+namespace AdrienBrault\DsPhp;
 
 use Symfony\AI\Platform\Message\Message;
 use Symfony\AI\Platform\Message\MessageBag;

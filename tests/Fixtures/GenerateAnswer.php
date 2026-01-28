@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace DSPy\Tests\Fixtures;
+namespace AdrienBrault\DsPhp\Tests\Fixtures;
 
-use DSPy\InputField;
-use DSPy\OutputField;
+use AdrienBrault\DsPhp\InputField;
+use AdrienBrault\DsPhp\OutputField;
 
 /** Answer questions using retrieved context. */
 class GenerateAnswer
