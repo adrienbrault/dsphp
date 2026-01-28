@@ -8,7 +8,7 @@ use AdrienBrault\DsPhp\InputField;
 use AdrienBrault\DsPhp\OutputField;
 
 /**
- * Evaluate expressions with operators like + - * /
+ * Evaluate expressions with operators like + - * /.
  */
 class MathOperation
 {

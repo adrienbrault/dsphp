@@ -170,10 +170,10 @@ final class SignatureReflectionTest extends TestCase
     #[Test]
     public function itPreservesSpecialCharactersInDocblock(): void
     {
-        // Docblock: "Evaluate expressions with operators like + - * /"
+        // Docblock: "Evaluate expressions with operators like + - * /."
         // rtrim($line, '* /') treats chars as a set, stripping trailing * and /
         // that are part of the content, not just comment markers.
         $instruction = SignatureReflection::getTaskInstruction(MathOperation::class);
-        self::assertSame('Evaluate expressions with operators like + - * /', $instruction);
+        self::assertSame('Evaluate expressions with operators like + - * /.', $instruction);
     }
 }

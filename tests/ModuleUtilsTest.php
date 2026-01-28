@@ -62,6 +62,7 @@ final class ModuleUtilsTest extends TestCase
         $module = new class($lm) {
             /** @var Predict<BasicQA> */
             public Predict $first;
+
             /** @var Predict<GenerateAnswer> */
             public Predict $second;
 

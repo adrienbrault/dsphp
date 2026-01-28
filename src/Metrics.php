@@ -9,7 +9,6 @@ use ReflectionProperty;
 
 use function array_count_values;
 use function array_filter;
-use function array_sum;
 use function count;
 use function explode;
 use function min;

@@ -33,7 +33,7 @@ final class ChainOfThought
 
     public function __clone()
     {
-        $this->predict = clone $this->predict;
+        $this->predict = clone $this->predict; // @phpstan-ignore property.readOnlyAssignNotInConstructor
     }
 
     /**
