@@ -61,6 +61,14 @@ final class LM
         return $this->history;
     }
 
+    /**
+     * Clear recorded history to free memory in long-running processes.
+     */
+    public function clearHistory(): void
+    {
+        $this->history = [];
+    }
+
     public function getModel(): string
     {
         return $this->model;

@@ -92,6 +92,22 @@ final class LMTest extends TestCase
         );
     }
 
+    #[Test]
+    public function itClearsHistory(): void
+    {
+        $platform = $this->createMock(PlatformInterface::class);
+        $platform->method('invoke')
+            ->willReturn($this->createDeferredResult('Paris'))
+        ;
+
+        $lm = new LM($platform, 'gpt-4o-mini');
+        $lm->chat([['role' => 'user', 'content' => 'test']]);
+        self::assertCount(1, $lm->getHistory());
+
+        $lm->clearHistory();
+        self::assertSame([], $lm->getHistory());
+    }
+
     private function createDeferredResult(string $text): DeferredResult
     {
         $converter = $this->createMock(ResultConverterInterface::class);
